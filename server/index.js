@@ -31,10 +31,22 @@ app.get('/questions/:id',async (req,res)=>{
 // create a questions
 app.post('/questions',async (req,res)=>{
     try {
-        const {id}=req.params;
+       
         const {question_text,answer_text}=req.body;
       const newQuestion=await pool.query('INSERT INTO question (question_text,answer_text) VALUES($1,$2) RETURNING *',[question_text,answer_text]);
       res.json(newQuestion.rows[0])  
+    } catch (err) {
+        console.error(err.message)
+    }
+});
+
+// update a questions
+app.put('/questions/:id',async (req,res)=>{
+    try {
+        const {id}=req.params;
+        const {question_text,answer_text}=req.body;
+      const updateQuestion=await pool.query('UPDATE question SET question_text=$1,answer_text=$2 WHERE question_id=$3 RETURNING *',[question_text,answer_text,id]);
+      res.json(updateQuestion.rows[0])  
     } catch (err) {
         console.error(err.message)
     }
