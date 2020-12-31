@@ -1,22 +1,15 @@
-import React,{Fragment,useState,useEffect} from 'react'
+import React, { Fragment, useState, useEffect } from "react";
 
+import Downshift from "downshift";
+import QuestionForm from './components/QuestionForm';
 const App = () => {
-  const [questions,setQuestions]=useState([]);
+   
 
-  useEffect(()=>{
-    const questionGrabber=async ()=>{
-      const response=await fetch('http://localhost:5000/questions');
-      const questions=await response.json();
-      console.log(questions)
-      setQuestions(questions)
-    }
-    questionGrabber()
-  },[])
   return (
-    <div>
-      hi
+    <div className='container'>
+      <QuestionForm />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
