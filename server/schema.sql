@@ -17,11 +17,12 @@ CREATE DATABASE randomquestions;
 CREATE TABLE question(
 question_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
 question_text VARCHAR(255) NOT NULL,
-answer_text VARCHAR(255) NOT NULL
+answer_text VARCHAR(255) NOT NULL,
+is_answered BOOL DEFAULT 'f' 
 
 );
 
-INSERT INTO question (question_text,answer_text) VALUES ('What is the capital of France?','Paris');
-INSERT INTO question (question_text,answer_text) VALUES ('Who is CEO of Tesla?','Elon Musk');
-INSERT INTO question (question_text,answer_text) VALUES ('The iPhone was created by which company?','Apple');
-INSERT INTO question (question_text,answer_text) VALUES ('How many Harry Potter books are there?','7');
+INSERT INTO question (question_text,answer_text, is_answered) VALUES ('What is your favourite color?','Blue','t');
+INSERT INTO question (question_text,answer_text, is_answered) VALUES ('What is your favourite car?','Benz','t');
+INSERT INTO question (question_text,answer_text, is_answered) VALUES ('What is your favourite blood group?','O+','t');
+INSERT INTO question (question_text,answer_text, is_answered) VALUES ('How old are you','40','t');
