@@ -6,19 +6,23 @@ const QuestionForm = () => {
     // let history=useHistory();
   const [questions, setQuestions] = useState([]);
   const [answer, setAnswer] = useState("");
-  const [randomQuestion,setRandomQuestion]=useState({});
-  const [name, setName] = useState("");
+ 
 const [labelSelected,SetLabelSelected]=useState("");
+const [idSelected,SetIdSelected]=useState("");
 
 
   useEffect(() => {
     const questionGrabber = async () => {
       const response = await AnswerQuestion.get("/");
     //   const questions = await response.json();
-      console.log(response.data);
+      console.log('questions',response.data);
       setQuestions(response.data);
-      SetLabelSelected(response.data[getRandomIntExclusive(0, response.data.length - 1)]
-    .question_text);
+      let randomNumber=getRandomIntExclusive(0, response.data.length - 1);
+      console.log('randomNumber',randomNumber)
+      SetLabelSelected(response.data[randomNumber].question_text);
+    SetIdSelected(response.data[randomNumber].question_id)
+    console.log('id',response.data[randomNumber].question_id)
+
     };
     questionGrabber();
     
@@ -32,16 +36,15 @@ const [labelSelected,SetLabelSelected]=useState("");
     console.log(event.target.value);
   };
 
-//   const handleSubmitAnswer = async (e) => {
-//     e.preventDefault();
+  const handleSubmitAnswer = async (e) => {
+    e.preventDefault();
    
-//     const id=randomQuestion.question_id
-//     const updateQuestion = await AnswerQuestion.put(`/${id}`, {
-//         question_text:randomQuestion.question_text,
-//         answer_text: answer
-//     });
-//     // history.push('/dashboard');
-//   };
+    const updateQuestion = await AnswerQuestion.put(`/${idSelected}`, {
+        question_text:labelSelected,
+        answer_text: answer
+    });
+    // history.push('/dashboard');
+  };
 
   const getRandomIntExclusive = (min, max) => {
     min = Math.ceil(min);
@@ -74,7 +77,7 @@ const [labelSelected,SetLabelSelected]=useState("");
         </div>
         <button
           type="submit"
-        //   onClick={handleSubmitAnswer}
+          onClick={handleSubmitAnswer}
           className="btn btn-primary"
         >
           Submit
