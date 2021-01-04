@@ -18,11 +18,11 @@ CREATE TABLE question(
 question_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
 question_text VARCHAR(255) NOT NULL,
 answer_text VARCHAR(255) NOT NULL,
-is_answered BOOL DEFAULT 'f' 
+is_answered BOOL NOT NULL DEFAULT 'f'
 
 );
 
-INSERT INTO question (question_text,answer_text, is_answered) VALUES ('What is your favourite color?','Blue','t');
-INSERT INTO question (question_text,answer_text, is_answered) VALUES ('What is your favourite car?','Benz','t');
-INSERT INTO question (question_text,answer_text, is_answered) VALUES ('What is your favourite blood group?','O+','t');
-INSERT INTO question (question_text,answer_text, is_answered) VALUES ('How old are you','40','t');
+INSERT INTO question (question_text,answer_text, is_answered) VALUES ('What is your favourite color?','Blue','f');
+INSERT INTO question (question_text,answer_text, is_answered) VALUES ('What is your favourite car?','Benz','f');
+INSERT INTO question (question_text,answer_text, is_answered) VALUES ('What is your favourite blood group?','O+','f');
+INSERT INTO question (question_text,answer_text, is_answered) VALUES ('How old are you','40','f');
